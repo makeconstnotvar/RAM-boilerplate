@@ -1,11 +1,9 @@
 import React from 'react';
-import {Provider} from "mobx-react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Page1} from "./pages/Page1";
 import {Page2} from "./pages/Page2";
 import {Layout} from "./Layout";
 import {LandingPage} from "./pages/LandingPage";
-import {stores} from "stores/stores";
 import {createRoot} from "react-dom/client";
 
 const App = () => {

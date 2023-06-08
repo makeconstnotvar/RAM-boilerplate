@@ -1,7 +1,5 @@
 import React, {Component} from "react";
-import {inject} from "mobx-react";
 
-@inject('$store2')
 class Page2 extends Component {
   doHandler = () => {
     const {$store2} = this.props;

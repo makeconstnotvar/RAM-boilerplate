@@ -1,14 +1,16 @@
 const path = require('path');
 const gulp = require('gulp');
 const sourcemaps = require('gulp-sourcemaps');
-const sass = require('gulp-sass')(require('sass'));
 const clean = require('gulp-clean-css');
-const autoprefixer = require('gulp-autoprefixer');
+//const autoprefixer = require('gulp-autoprefixer');
 const hash = require('gulp-hash');
 const inject = require('gulp-inject');
 const del = require('del');
+const postcss = require("gulp-postcss");
+const tailwindcss = require("tailwindcss");
+const autoprefixer = require("autoprefixer");
 
-const apps = ['admin', 'manager', 'secure', 'rick-and-morty'];
+const apps = ['admin', 'manager', 'secure', 'ram'];
 
 /* Копирование */
 apps.forEach(app => {
@@ -35,13 +37,14 @@ apps.forEach(app => {
 });
 
 /* Стили */
-const styles = ['src/styles/styles.scss'];
+//const styles = ['src/styles/styles.scss'];
+const styles = ['src/index.css'];
 
 gulp.task('styles-release', function () {
+
   return gulp.src(styles)
-    .pipe(sourcemaps.init())
-    .pipe(sass({importer: tildaResolver}).on('error', sass.logError))
-    .pipe(autoprefixer())
+    .pipe(sourcemaps.init(undefined))
+    .pipe(postcss([tailwindcss(), autoprefixer()]))
     .pipe(hash())
     .pipe(clean())
     .pipe(sourcemaps.write('.'))
@@ -53,8 +56,7 @@ gulp.task('styles-release', function () {
 gulp.task('styles-debug', function () {
   return gulp.src(styles)
     .pipe(sourcemaps.init())
-    .pipe(sass({importer: tildaResolver}).on('error', sass.logError))
-    .pipe(autoprefixer())
+    .pipe(postcss([tailwindcss()],{}))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('build/admin/styles'))
     .pipe(gulp.dest('build/manager/styles'))
@@ -71,15 +73,15 @@ gulp.task('debug', gulp.series(
   'copy-admin',
   'copy-manager',
   'copy-secure',
-  'copy-rick-and-morty',
+  'copy-ram',
   'common-admin',
   'common-manager',
   'common-secure',
-  'common-rick-and-morty',
+  'common-ram',
   'inject-admin',
   'inject-manager',
   'inject-secure',
-  'inject-rick-and-morty',
+  'inject-ram',
 ));
 
 gulp.task('release', gulp.series(
@@ -87,15 +89,15 @@ gulp.task('release', gulp.series(
   'copy-admin',
   'copy-manager',
   'copy-secure',
-  'copy-rick-and-morty',
+  'copy-ram',
   'common-admin',
   'common-manager',
   'common-secure',
-  'common-rick-and-morty',
+  'common-ram',
   'inject-admin',
   'inject-manager',
   'inject-secure',
-  'inject-rick-and-morty',
+  'inject-ram',
 ));
 
 gulp.task('watch', gulp.series('styles-delete', 'styles-debug', function () {

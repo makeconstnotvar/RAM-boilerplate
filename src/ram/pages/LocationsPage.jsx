@@ -3,7 +3,7 @@ import React from 'react';
 const LocationsPage = props => {
   return (
     <div>
-      <h1>Characters</h1>
+      <h1>Локации</h1>
     </div>
   )
 }

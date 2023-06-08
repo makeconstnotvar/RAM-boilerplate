@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {inject} from "mobx-react";
 import Select from 'react-select'
 
 const options = [
@@ -8,7 +7,6 @@ const options = [
   { value: 'vanilla', label: 'Vanilla' }
 ]
 
-@inject('$store1')
 class Page1 extends Component {
   doHandler = () => {
     const {$store1} = this.props;

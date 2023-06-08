@@ -11,7 +11,7 @@ module.exports = {
   entry: {
     'admin': './src/admin/App.jsx',
     'manager': './src/manager/App.jsx',
-    'rick-and-morty': './src/rick-and-morty/App.jsx',
+    'ram': './src/ram/App.jsx',
   },
   output: {
     clean: false,
@@ -55,6 +55,7 @@ module.exports = {
       rewrites: [
         {from: /^\/admin/, to: '/admin/index.html'},
         {from: /^\/manager/, to: '/manager/index.html'},
+        {from: /^\/ram/, to: '/ram/index.html'},
       ],
     },
     static: {

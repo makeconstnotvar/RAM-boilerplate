@@ -3,7 +3,7 @@ const app = express();
 const http = require('http');
 const path = require('path');
 const server = http.createServer(app);
-const apps = ['admin', 'manager', 'secure', 'rick-and-morty',];
+const apps = ['admin', 'manager', 'secure', 'ram',];
 
 let folder = 'build', i = process.argv.indexOf('--folder');
 if (i > -1) {
@@ -37,8 +37,9 @@ app.get(['/admin', '/admin/*'], (req, res) => {
 app.get(['/manager', '/manager/*'], (req, res) => {
   res.sendFile('index.html', {root: path.join(__dirname, `${folder}/manager`)});
 });
-app.get(['/rick-and-morty', '/rick-and-morty/*'], (req, res) => {
-  res.sendFile('index.html', {root: path.join(__dirname, `${folder}/rick-and-morty`)});
+
+app.get(['/ram', '/ram/*'], (req, res) => {
+  res.sendFile('index.html', {root: path.join(__dirname, `${folder}/ram`)});
 });
 
 app.use(function (req, res, next) {
