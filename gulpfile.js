@@ -41,26 +41,27 @@ apps.forEach(app => {
 const styles = ['src/index.css'];
 
 gulp.task('styles-release', function () {
-
   return gulp.src(styles)
     .pipe(sourcemaps.init(undefined))
-    .pipe(postcss([tailwindcss(), autoprefixer()]))
+    .pipe(postcss([tailwindcss(), autoprefixer()],{}))
     .pipe(hash())
     .pipe(clean())
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('build/admin/styles'))
     .pipe(gulp.dest('build/manager/styles'))
-    .pipe(gulp.dest('build/secure/styles'));
+    .pipe(gulp.dest('build/secure/styles'))
+    .pipe(gulp.dest('build/ram/styles'));
 });
 
 gulp.task('styles-debug', function () {
   return gulp.src(styles)
     .pipe(sourcemaps.init())
-    .pipe(postcss([tailwindcss()],{}))
+    .pipe(postcss([tailwindcss(), autoprefixer()],{}))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('build/admin/styles'))
     .pipe(gulp.dest('build/manager/styles'))
-    .pipe(gulp.dest('build/secure/styles'));
+    .pipe(gulp.dest('build/secure/styles'))
+      .pipe(gulp.dest('build/ram/styles'));
 });
 
 gulp.task('styles-delete', function () {
