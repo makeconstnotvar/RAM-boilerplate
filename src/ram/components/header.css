@@ -1,0 +1,5 @@
+
+.header {
+    @apply p-5 flex flex-1 gap-5;
+}
+
